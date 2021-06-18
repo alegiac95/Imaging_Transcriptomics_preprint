@@ -480,7 +480,7 @@ def virtual_histology(data_path, n_comp=None, var=None, out_directory=None):
               p_val_corr=p_val_corrected, pls=_pls, output_path=out_directory)
 
 
-if __name__ == '__main__':
+def main():
     # execute the code
     inputs = get_args()
     data_path = inputs.input
@@ -492,3 +492,7 @@ if __name__ == '__main__':
     out_directory = inputs.out
     virtual_histology(data_path, n_comp=ncomp, var=var,
                       out_directory=out_directory)
+
+
+if __name__ == '__main__':
+    main()
