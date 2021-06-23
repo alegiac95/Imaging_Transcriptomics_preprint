@@ -98,8 +98,15 @@ def check_correct_size(file_path, atlas_path):
 def get_args():
     """Parse the inputs to run the virtual histology script.
     """
-    parser = argparse.ArgumentParser(description="Perform virtual histology analysis on a neuroimaging scan. ",
-                                     epilog="Check your results in the specified folder or in the file path of the input scan, if you have not specified an output path.")
+    DESCRIPTION = """Perform virtual histology analysis on a neuroimaging scan. """
+    EPILOG = """Check your results in the specified folder or in the file path of the input scan, if you have not specified an output path.
+            If you used this software in your research please cite:
+            - Imaging transcriptomics: Convergent cellular, transcriptomic, and molecular neuroimaging signatures in the healthy adult human brain
+                Daniel Martins, Alessio Giacomel, Steven CR Williams, Federico E Turkheimer, Ottavia Dipasquale, Mattia Veronese, PET templates working group
+                bioRxiv 2021.06.18.448872; doi: https://doi.org/10.1101/2021.06.18.448872
+            """
+    parser = argparse.ArgumentParser(description=DESCRIPTION,
+                                     epilog=EPILOG)
 
     parser.add_argument("-i", "--input",
                         type=str,
@@ -146,6 +153,10 @@ def get_average_from_atlas(scan_data, atlas_data, n_regions=41):
 def permute_scan(scan_to_permute, n_permutations=1000):
     """Use null models to permute the scan and get new permuted parcellations.
     The permutations are done with the spatialnulls library available on Github.
+    Please note that the returned array will have only cortical values (if data corresponding
+    to the index of subcortical regions these are automatically discarded by the null permutation
+    library). Additionally, we perform permutation on the left hemisphere only (given that the
+    right hemisphere of the AHBA is sparsly sampled).
 
     INPUTS:
     - scan_to_permute: array with the scan values to permute (e.g.: array with average values in some ROIs).
@@ -172,6 +183,7 @@ def get_optimal_components(explained_model_variance, user_var=0.6):
 
     INPUT:
     - explained_model_variance: np.array with the explained variance from a model for each component.
+    - user_var: variance explained by the components, selected by the user (deafult= 60%)
     """
     min_explained_variance = user_var
     cumulative_explained_var = np.cumsum(explained_model_variance)
@@ -225,9 +237,12 @@ def pls_alignments(weights, scores):
 
 # PLOTTING AND REPORTING
 
-
 class PDF(FPDF):
+    """Class to generate a PDF report for the imaging-transcriptomics script.
+    """
+
     def header(self):
+        """The header will contain always the title."""
         self.rect(10.0, 10.0, 190.0, 280.0)
         self.line(10.0, 50.0, 200.0, 50.0)
         self.set_font("Helvetica", "B", 14)
@@ -235,12 +250,15 @@ class PDF(FPDF):
                   txt="Virtual Histology Analysis Report", ln=True)
 
     def analysis_info(self, filename, date, filepath):
+        """Info on the analysis performed. Information included are the name of
+        the scan of the input, date of the analysis and the original path of the scan."""
         self.set_font("Courier", "", 10)
         self.cell(w=100.0, h=8.0, align="L", txt=f"  Scan Name: {filename}")
         self.cell(w=100.0, h=8.0, align="L", txt=f"  Date: {date}", ln=True)
         self.cell(w=100.0, h=10.0, align="L", txt=f"  File Path: {filepath}")
 
-    def pls_regression(self, variance, dim, path_plots):
+    def pls_regression(self, path_plots):
+        """Include the plots of the pls components."""
         self.ln(20)
         self.set_font("Helvetica", "BU", 12)
         self.cell(w=0, h=10.0, align="L", txt="-PLS Regression")
@@ -297,8 +315,8 @@ def reporting(scan_path,  varexp, dim, z, p_val, p_val_corr, pls, output_path=No
 
     INPUTS:
     - scan_path: path of the scan used for the analysis. This is needed to generate the report folder name.
+    - varexp:
     - output_path: path where the results are saved. If no path is provided the pathof the scan is used.
-    - **kwargs: dictionaries of the values to save to file.
     """
 
     print("Creating report...")
@@ -320,15 +338,17 @@ def reporting(scan_path,  varexp, dim, z, p_val, p_val_corr, pls, output_path=No
     # Create the plots
     plot_variance(varexp, dim, out_directory)
 
+    # Create the PDF report
     report_path = out_directory / "report.pdf"
     date = datetime.now().strftime("%d-%m-%Y")
     report = PDF(orientation="P", unit="mm", format="A4")
     report.add_page()
     report.analysis_info(filename=scan_path.name,
                          date=date, filepath=scan_path)
-    report.pls_regression(0, 0, path_plots=out_directory)
+    report.pls_regression(path_plots=out_directory)
     report.output(report_path, 'F')
 
+    # create the csv file(s) to save
     for i in z.keys():
         data = np.vstack((pls[i].reshape(1, 15633), z[i].reshape(
             1, 15633), p_val[i].reshape(1, 15633), p_val_corr[i].reshape(1, 15633))).T
@@ -346,10 +366,10 @@ def print_table(var, p):
     print("+-----------+----------------+-------+")
     print("")
 
-# MAIN VIRTUAL HISTOLOGY SCRIPT
+# MAIN IMAGING TRANSCRIPTOMICS SCRIPT
 
 
-def virtual_histology(data_path, n_comp=None, var=None, out_directory=None):
+def imaging_transcriptomics(data_path, n_comp=None, var=None, out_directory=None):
     style.use("seaborn-colorblind")
     # LOAD ATLAS FILE
     atlas_path = Path(__file__).parent.absolute() / \
@@ -361,9 +381,7 @@ def virtual_histology(data_path, n_comp=None, var=None, out_directory=None):
 
     # Get average ROI from data
     avg_roi = get_average_from_atlas(img_data, atlas_data).reshape((41, 1))
-    pd.DataFrame(avg_roi).to_csv('~/Desktop/ROI_data.csv')
     my_data_y = zscore(avg_roi, axis=0, ddof=1)
-    pd.DataFrame(my_data_y).to_csv('~/Desktop/z_data.csv')
 
     # LOAD EXPRESSION AND GENE DATA
     expression_data_file = Path(__file__).parent / \
@@ -379,22 +397,31 @@ def virtual_histology(data_path, n_comp=None, var=None, out_directory=None):
                              n_components=15, n_perm=0, n_boot=0)
     varexp = results.get("varexp")
 
+    # Select the numebr of components if not specified by the user
     if n_comp == None:
         dim = get_optimal_components(varexp, user_var=float(var)/100)
     else:
         dim = n_comp
+
     # DATA PERMUTATION AND ROTATION
     my_data_cortical = my_data_y[0:34, 0].reshape(34, 1)
     my_data_subcortical = my_data_y[34:, 0].reshape(7, 1)
     print("Creating scan permutations...")
+
+    # Cortical permuted --> permutation keeping in consideration spatial
+    # autocorrelation of the cortical regions
     cortical_permuted = permute_scan(my_data_cortical).reshape(34, 1000)
-    # subcortical_permuted --> random shuffling of the values in the subcortical regions
+
+    # Subcortical_permuted --> random shuffling of the values in the subcortical regions
     subcortical_permuted = np.array(
         [np.random.permutation(my_data_subcortical) for _ in range(1000)]).reshape(7, 1000)
-    # merge the two permutated regions
+
+    # Merge permuted cortical regions and shuffled subcortical into the semi-random matrix with the data
+    # the matrix is not fully random as there is still a subdivision of the corticla and subcortical data.
     my_permuted_y = np.zeros((my_data_y.shape[0], 1000))
     my_permuted_y[0:34, :] = cortical_permuted
     my_permuted_y[34:, :] = subcortical_permuted
+
     # Bootstrap to get p_val, looping on all dimensions from 1 to dim
     R_boot, p_boot = bootstrap_pls(my_data_x, my_data_y, my_permuted_y, dim)
 
@@ -412,8 +439,6 @@ def virtual_histology(data_path, n_comp=None, var=None, out_directory=None):
         if R1[i] < 0:
             weights[:, i], scores[:, i] = pls_alignments(
                 weights[:, i], scores[:, i])
-    pd.DataFrame(weights).to_csv('~/Desktop/weights.csv')
-    pd.DataFrame(scores).to_csv('~/Desktop/scores.csv')
     # Store results in descending order
     # create dictionaries as we don't know a priori how many components the algorithm or the user will select
     pls_w = {}
@@ -431,7 +456,6 @@ def virtual_histology(data_path, n_comp=None, var=None, out_directory=None):
         pls_wz.update({i: zscore(pls_w[i], axis=0, ddof=1)})
         _pls_weights_boot.update(
             {i: np.zeros((weights.shape[0], weights.shape[1], 1000))})
-    pd.DataFrame().from_dict(pls_w).to_csv('~/Desktop/pls_weights.csv')
 
     # x shape : 41x15633
     # x_resampled = np.array([np.random.permutation(my_data_x) for _ in tqdm(range(1000), desc="Permuting gene list")])
@@ -473,15 +497,13 @@ def virtual_histology(data_path, n_comp=None, var=None, out_directory=None):
         _, corrected, _, _ = multipletests(
             p_data[::-1].reshape(1, 15633), method="fdr_bh", is_sorted=True)
         p_val_corrected.update({comp: corrected})
-    pd.DataFrame().from_dict(_temp).to_csv('~/Desktop/temp.csv')
-    pd.DataFrame().from_dict(_pls_std).to_csv('~/Desktop/std.csv')
     # Report generation and saving
     reporting(data_path, varexp, dim, z=_z, p_val=p_val,
               p_val_corr=p_val_corrected, pls=_pls, output_path=out_directory)
 
 
 def main():
-    # execute the code
+    # Get user inputs and check them
     inputs = get_args()
     data_path = inputs.input
     check_input_file_exists(data_path)
@@ -490,8 +512,9 @@ def main():
     var = inputs.variance
     ncomp = inputs.ncomp
     out_directory = inputs.out
-    virtual_histology(data_path, n_comp=ncomp, var=var,
-                      out_directory=out_directory)
+    # Run the analysis
+    imaging_transcriptomics(data_path, n_comp=ncomp, var=var,
+                            out_directory=out_directory)
 
 
 if __name__ == '__main__':
