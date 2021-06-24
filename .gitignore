@@ -1,6 +1,6 @@
 .vscode/
 pet_templates/
-Virtual_Histology/__pycache__
-Virtual_Histology/markello_spatialnulls
-Virtual_Histology/pyls
+imaging_transcriptomics/__pycache__
+imaging_transcriptomics/markello_spatialnulls
+imaging_transcriptomics/pyls
 .DS_STORE

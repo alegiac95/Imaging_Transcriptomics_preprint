@@ -6,17 +6,19 @@ from pathlib import Path
 
 
 def normalize_scan(image_path):
+    """Utils function to normalize a PET scan between 0 and 1. To normalize the scan the minimun 
+    is subtracted from the original scan and is then divided by the value of the 95th percentile."""
     image_path = Path(image_path)
     image_scan = nib.load(image_path)
     file_name = image_path.stem.strip('.nii')
     base_path = image_path.parent
-    new_file_path = base_path / f"normalized_{file_name}_1.nii.gz"
+    new_file_path = base_path / f"normalized_{file_name}.nii.gz"
     header = image_scan.header
     data = image_scan.get_fdata()
     print(f"min: {data.min()}, max: {data.max()}")
     affine = image_scan.affine
     int_data = data - data.min()
-    normalized_data = int_data / np.percentile(int_data, 99)
+    normalized_data = int_data / np.percentile(int_data, 95)
     print(
         f"NORMALIZED  min: {normalized_data.min()}, max: {normalized_data.max()}")
     new_nifti = nib.Nifti1Image(normalized_data, affine, header=header)
