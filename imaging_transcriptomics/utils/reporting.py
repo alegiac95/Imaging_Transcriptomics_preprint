@@ -7,6 +7,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from fpdf import FPDF
 
+# TODO: update the info on the pdf
+
 
 class PDF(FPDF):
     """Class to generate a PDF report for the imaging-transcriptomics script.

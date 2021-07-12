@@ -12,7 +12,7 @@ from statsmodels.stats.multitest import multipletests
 from tqdm import tqdm
 
 # Custom imports
-import utils
+from . import utils
 
 # PROCESSING FUNCTIONS
 
@@ -109,7 +109,7 @@ def imaging_transcriptomics(data_path, n_comp=None, var=None, out_directory=None
     # Bootstrap to get p_val, looping on all dimensions from 1 to dim
     R_boot, p_boot = bootstrap_pls(my_data_x, my_data_y, my_permuted_y, dim)
 
-    print_table(R_boot, p_boot)
+    utils.print_table(R_boot, p_boot)
 
     # Bootstrap the genes list
     gene_index = np.array(list(range(1, 15633+1)))

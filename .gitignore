@@ -1,6 +1,13 @@
+# Stuff from vscode
 .vscode/
+# Test files for development
 pet_templates/
+# Stuff from other required libraries
 imaging_transcriptomics/__pycache__
 imaging_transcriptomics/markello_spatialnulls
 imaging_transcriptomics/pyls
+# MAC related files
 .DS_STORE
+# Packaging stuff
+build
+dist

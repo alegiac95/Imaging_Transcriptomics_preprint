@@ -1,0 +1,6 @@
+include data/atlas_info.csv
+include data/atlas-desikankilliany_new_1mm_MNI152.nii.gz
+include data/expression_separate_normalization.csv
+include data/fsa5_lh_aparc.annot
+include data/fsa5_rh_aparc.annot
+include data/genes_label.txt
