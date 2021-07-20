@@ -12,7 +12,7 @@ from statsmodels.stats.multitest import multipletests
 from tqdm import tqdm
 
 # Custom imports
-from . import utils
+import utils
 
 # PROCESSING FUNCTIONS
 

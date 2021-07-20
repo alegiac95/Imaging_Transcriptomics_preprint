@@ -16,7 +16,7 @@ def get_args():
 
     parser.add_argument("-i", "--input",
                         type=str,
-                        help="""Input imaging file in NiFTI format (.nii, .nii.gz).
+                        help="""Input imaging file in NIfTI format (.nii, .nii.gz).
                         The input file is expected to have the same matrix size as the atlas used (182x218x182), 
                         if the input image has different matrix size this can be resliced to match the resolution of the MNI152 template provided with FSL.
                         """,

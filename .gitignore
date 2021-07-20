@@ -3,6 +3,7 @@
 # Test files for development
 pet_templates/
 # Stuff from other required libraries
+# These need to be installed by the user
 imaging_transcriptomics/__pycache__
 imaging_transcriptomics/markello_spatialnulls
 imaging_transcriptomics/pyls
