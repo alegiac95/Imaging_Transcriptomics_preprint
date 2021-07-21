@@ -7,5 +7,5 @@ In this page are the contact information about the authors of the paper and soft
 Contact us
 ----------
 We are happy to answer any questions you might have about the methods and/or problems/suggestions with the software.
-For any questions regarding the methodology you can contact
+For any questions regarding the methodology you can contact 
 

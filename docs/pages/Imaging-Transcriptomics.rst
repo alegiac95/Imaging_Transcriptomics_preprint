@@ -13,6 +13,6 @@ Partial least squares
 Desikan-Killiany Atlas
 ----------------------
 
+ 
 
-
-for more information on the methods you can have a look at our paper: 
+.. seealso:: For a more comprehensive dive into the methodology have a look at our paper: 

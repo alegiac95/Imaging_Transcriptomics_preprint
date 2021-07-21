@@ -3,6 +3,15 @@
 Script usage
 ============
 
+Once you have installed the package you can run the script as
+
+.. code:: bash
+
+    imaging-transcriptomics -i path_to_file -n 2
+
+    
+
+
 The script has some parameters that can be tuned according to the necessity of the analysis, which can be viewed by calling the help function from the script as :code:`imaging-transcriptomics -h` or :code:`imaging-transcriptomics --help`.
 
 Here we will describe in more details all the parameters of the script. 
@@ -14,7 +23,7 @@ The parameters of the script are:
 
 * **-v (--variance)**: total amount of variance you want your components to explain. The code will automatically select the number of components that explain at least the variance you specify. The parameter *must* be an **integer** between 10 and 100, which represents the percentage of explained variance. For example if you specify :code:`-v 30` and the first 3 componets explain 10%, 25% and 3%, repsectively, of the total variance the script will use 2 components, even if they explain 35% of the total variance.
 
-**Note** that the :code:`-v` and :code:`-n` parameters are mutually exclusive and only one has to be provided as argument for the script, otherwise an error will occurr.
+.. note:: that the **-v** and **-n** parameters are mutually exclusive and only one has to be provided as argument for the script, otherwise an error will occurr.
 
 Optionally an additional parameter that can be provided is:
 
