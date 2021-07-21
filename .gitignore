@@ -4,9 +4,11 @@
 pet_templates/
 # Stuff from other required libraries
 # These need to be installed by the user
-imaging_transcriptomics/__pycache__
-imaging_transcriptomics/markello_spatialnulls
-imaging_transcriptomics/pyls
+Imaging_Transcriptomics/__pycache__
+Imaging_Transcriptomics/markello_spatialnulls
+Imaging_Transcriptomics/pyls
+Imaging_Transcriptomics/tests
+Imaging_Transcriptomics/utils/__pycache__
 # MAC related files
 .DS_STORE
 # Packaging stuff
