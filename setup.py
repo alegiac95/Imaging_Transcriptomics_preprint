@@ -8,7 +8,7 @@ def read_long_description():
 
 setuptools.setup(
     name="imaging-transcriptomics",
-    version="1.0",
+    version="0.1",
     author="Daniel Martins, MD, PhD; Alessio Giacomel",
     author_email=["daniel.martins@kcl.ac.uk", "alessio.giacomel@kcl.ac.uk"],
     description="Perform imaging-transcriptomics analysis on a neuroimaging scan.",
