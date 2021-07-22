@@ -1,12 +1,18 @@
 import setuptools
 
+
+def read_long_description():
+    with open("README.rst", "r") as f:
+        return f.read()
+
+
 setuptools.setup(
     name="imaging-transcriptomics",
     version="1.0",
     author="Daniel Martins, MD, PhD; Alessio Giacomel",
     author_email=["daniel.martins@kcl.ac.uk", "alessio.giacomel@kcl.ac.uk"],
     description="Perform imaging-transcriptomics analysis on a neuroimaging scan.",
-    # TODO: add long description
+    long_description=read_long_description(),
     classifiers=["Intended Audience :: Healthcare Industry",
                  "Intended Audience :: Science/Research",
                  "Topic :: Scientific/Engineering :: Image Processing",
