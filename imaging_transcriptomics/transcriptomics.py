@@ -12,7 +12,7 @@ from statsmodels.stats.multitest import multipletests
 from tqdm import tqdm
 
 # Custom imports
-import utils
+import img_utils
 
 # PROCESSING FUNCTIONS
 
@@ -63,7 +63,7 @@ def imaging_transcriptomics(data_path, n_comp=None, var=None, out_directory=None
     img_data = nib.load(data_path).get_fdata()
 
     # Get average ROI from data
-    avg_roi = utils.get_average_from_atlas(
+    avg_roi = img_utils.get_average_from_atlas(
         img_data, atlas_data).reshape((41, 1))
     my_data_y = zscore(avg_roi, axis=0, ddof=1)
 
@@ -83,7 +83,7 @@ def imaging_transcriptomics(data_path, n_comp=None, var=None, out_directory=None
 
     # Select the numebr of components if not specified by the user
     if n_comp == None:
-        dim = utils.get_optimal_components(varexp, user_var=float(var)/100)
+        dim = img_utils.get_optimal_components(varexp, user_var=float(var)/100)
     else:
         dim = n_comp
 
@@ -94,7 +94,8 @@ def imaging_transcriptomics(data_path, n_comp=None, var=None, out_directory=None
 
     # Cortical permuted --> permutation keeping in consideration spatial
     # autocorrelation of the cortical regions
-    cortical_permuted = utils.permute_scan(my_data_cortical).reshape(34, 1000)
+    cortical_permuted = img_utils.permute_scan(
+        my_data_cortical).reshape(34, 1000)
 
     # Subcortical_permuted --> random shuffling of the values in the subcortical regions
     subcortical_permuted = np.array(
@@ -109,7 +110,7 @@ def imaging_transcriptomics(data_path, n_comp=None, var=None, out_directory=None
     # Bootstrap to get p_val, looping on all dimensions from 1 to dim
     R_boot, p_boot = bootstrap_pls(my_data_x, my_data_y, my_permuted_y, dim)
 
-    utils.print_table(R_boot, p_boot)
+    img_utils.print_table(R_boot, p_boot)
 
     # Bootstrap the genes list
     gene_index = np.array(list(range(1, 15633+1)))
@@ -121,7 +122,7 @@ def imaging_transcriptomics(data_path, n_comp=None, var=None, out_directory=None
     scores = results.get("x_scores")
     for i in range(R1.size):
         if R1[i] < 0:
-            weights[:, i], scores[:, i] = utils.pls_alignments(
+            weights[:, i], scores[:, i] = img_utils.pls_alignments(
                 weights[:, i], scores[:, i])
 
     # Create dictionaries as we don't know a priori how many components the algorithm or the user will select
@@ -184,17 +185,17 @@ def imaging_transcriptomics(data_path, n_comp=None, var=None, out_directory=None
             p_data[::-1].reshape(1, 15633), method="fdr_bh", is_sorted=True)
         p_val_corrected.update({comp: corrected})
     # Report generation and saving
-    utils.reporting(data_path, varexp, dim, z=_z, p_val=p_val,
-                    p_val_corr=p_val_corrected, pls=_pls, output_path=out_directory)
+    img_utils.reporting(data_path, varexp, dim, z=_z, p_val=p_val,
+                        p_val_corr=p_val_corrected, pls=_pls, output_path=out_directory)
 
 
 def main():
     # Get user inputs and check them
-    inputs = utils.get_args()
+    inputs = img_utils.get_args()
     data_path = inputs.input
-    utils.check_input_file_exists(data_path)
-    utils.check_correct_size(data_path, Path(__file__).parent.absolute() /
-                             "data/atlas-desikankilliany_new_1mm_MNI152.nii.gz")
+    img_utils.check_input_file_exists(data_path)
+    img_utils.check_correct_size(data_path, Path(__file__).parent.absolute() /
+                                 "data/atlas-desikankilliany_new_1mm_MNI152.nii.gz")
     var = inputs.variance
     ncomp = inputs.ncomp
     out_directory = inputs.out

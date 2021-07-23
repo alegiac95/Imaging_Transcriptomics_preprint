@@ -9,3 +9,7 @@ Contact us
 We are happy to answer any questions you might have about the methods and/or problems/suggestions with the software.
 For any questions regarding the methodology you can contact 
 
+
+Cite our work
+-------------
+If you use our software or methods in your research please cite our work

@@ -44,12 +44,20 @@
 The parameters of the script are:</p>
 <ul class="simple">
 <li><p><strong>-i (–input)</strong>: Scan on which you want to perform the analysis. It is <em>reccomended</em> that you provide an absolute path to your scan (e.g., <code class="code docutils literal notranslate"><span class="pre">~/Desktop/myscan.nii.gz</span></code>) instead of a relative one (e.g., <code class="code docutils literal notranslate"><span class="pre">myscan.nii.gz</span></code>) to avoid errors. The input file <em>must</em> be an imaging file in NIfTI format (both <code class="code docutils literal notranslate"><span class="pre">.nii</span></code> and <code class="code docutils literal notranslate"><span class="pre">.nii.gz</span></code> formats are supported) and have a matrix dimension of 182x218x182. If your image has a different matrix size you can reslice it to match this dimension with your preferred method. (A quick method is to use <em>fslview</em> and reslice to match the dimension of the included <em>MNI152_1mm</em> brain atlas).</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If the input scan is not in the required dimension <strong>(182x218x182)</strong> the script will throw an error. You should always check the dimension before running the script and eventually relsice your image to the matching dimensions.</p>
+</div>
+<ul class="simple">
 <li><p><strong>-n (–ncomp)</strong>: number of PLS components to use for the analysis. The parameter <em>must</em> be an <strong>integer</strong> between 1 and 15, otherwise an error will occurr. <em>Please note</em> that in PLS regression the first component is not necessarilty the component explaining the most amout of variance, as in PCA.</p></li>
+</ul>
+<ul class="simple">
 <li><p><strong>-v (–variance)</strong>: total amount of variance you want your components to explain. The code will automatically select the number of components that explain at least the variance you specify. The parameter <em>must</em> be an <strong>integer</strong> between 10 and 100, which represents the percentage of explained variance. For example if you specify <code class="code docutils literal notranslate"><span class="pre">-v</span> <span class="pre">30</span></code> and the first 3 componets explain 10%, 25% and 3%, repsectively, of the total variance the script will use 2 components, even if they explain 35% of the total variance.</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>that the <strong>-v</strong> and <strong>-n</strong> parameters are mutually exclusive and only one has to be provided as argument for the script, otherwise an error will occurr.</p>
+<p>Please note that the <strong>-v</strong> and <strong>-n</strong> parameters are mutually exclusive and only one has to be provided as argument for the script, otherwise an error will occurr.</p>
 </div>
 <p>Optionally an additional parameter that can be provided is:</p>
 <ul class="simple">
