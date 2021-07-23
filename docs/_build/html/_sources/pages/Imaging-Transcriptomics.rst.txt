@@ -7,7 +7,7 @@ Imaging transcriptomics is a methodology that allows to identify the spatial aut
 
 An overview of the methodology can be seen in the figure below.
 
-.. image:: /_static/imaging_transcriptomics.png
+.. image:: ../_static/imaging_transcriptomics.png
     :alt: alternate-text
     :align: center
 
@@ -16,7 +16,7 @@ In brief, average values of the scan are extracted from 41 brain regions as defi
 
 As a result of the PLS regression we obtain the ranked genes list according to the spatial alignment with the neuroimaging marker of interest.
 
-.. seealso:: For a more comprehensive dive into the methodology have a look at our paper: 
+.. seealso:: For a more comprehensive dive into the methodology have a look at our paper: **Imaging transcriptomics: Convergent cellular, transcriptomic, and molecular neuroimaging signatures in the healthy adult human brain**. *Daniel Martins, Alessio Giacomel, Steven CR Williams, Federico Turkheimer, Ottavia Dipasquale, Mattia Veronese, PET templates working group*. bioRxiv 2021.06.18.448872; doi: `https://doi.org/10.1101/2021.06.18.448872 <https://doi.org/10.1101/2021.06.18.448872>`_
 
 
 Allen Human Brain Atlas

@@ -36,7 +36,43 @@
   <section id="how-to-install">
 <h1>How to install<a class="headerlink" href="#how-to-install" title="Permalink to this headline">¶</a></h1>
 <p>Here is the guide on how to install the <em>Imaging-Transcriptomics</em> tool so you can run it from your command line.
-The first step is to be sure to have <code class="code docutils literal notranslate"><span class="pre">python</span> <span class="pre">(v&gt;=3.6)</span></code> and <code class="code docutils literal notranslate"><span class="pre">pip</span></code> installed.</p>
+We reccomend using <code class="code docutils literal notranslate"><span class="pre">anaconda</span></code> to manage your installation of the <code class="code docutils literal notranslate"><span class="pre">imaging-transcriptomics</span></code> package.</p>
+<p>To run the script you will need to install two additional packages not listed in <code class="code docutils literal notranslate"><span class="pre">pip</span></code>, which are:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/rmarkello/pyls/">pyls</a>, to perform partial least squares regression</p></li>
+<li><p><a class="reference external" href="https://markello-spatialnulls.netlify.app/index.html">spatialnulls</a>, to perform the permutatiuon of cortical brain areas maintaining the autocorrelation of hte brain.</p></li>
+</ul>
+<p>Both this packages are available from Github.</p>
+<section id="setting-up-your-environment">
+<h2>Setting up your environment<a class="headerlink" href="#setting-up-your-environment" title="Permalink to this headline">¶</a></h2>
+<p>A quick way to have the script setup and running is to create a <code class="code docutils literal notranslate"><span class="pre">conda</span></code> environment, install the previously mentioned packages and then install the script.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>To set up the environment you will need to have <a class="reference external" href="https://docs.anaconda.com/anaconda/install/index.html">anaconda</a> and <a class="reference external" href="https://git-scm.com/downloads">Git</a> installed.</p>
+</div>
+<p>An example of how to create the environment is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">create</span> <span class="o">--</span><span class="n">name</span> <span class="n">imaging_transcriptomics</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.7</span> <span class="n">pip</span>
+<span class="n">conda</span> <span class="n">activate</span> <span class="n">imaging_transcriptomics</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">netneurolab</span><span class="o">/</span><span class="n">markello_spatialnulls</span>
+<span class="n">cd</span> <span class="n">markello_spatialnulls</span><span class="o">/</span>
+<span class="n">conda</span> <span class="n">env</span> <span class="n">update</span> <span class="o">-</span><span class="n">f</span> <span class="n">environment</span><span class="o">.</span><span class="n">yml</span>
+<span class="n">cd</span> <span class="o">..</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">rmarkello</span><span class="o">/</span><span class="n">pyls</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">pyls</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+</pre></div>
+</div>
+<p>The previous list of commands will create a conda environment (named <em>imaging_transcriptomics</em>) with the packages needed to run the <code class="code docutils literal notranslate"><span class="pre">imaging_transcriptomics</span></code> package.</p>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>To install the package once the previous step is completed run from your termianl the command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">imaging_transcriptomics</span>
+</pre></div>
+</div>
+<p>Now you’re all set to run your imaging transcriptomics analyses!
+Check out our <a class="reference internal" href="getting-started.html#gettingstarted"><span class="std std-ref">getting started</span></a> guide and our <a class="reference internal" href="usage.html#usage"><span class="std std-ref">usage</span></a> to learn how to use the script or the rest of the documentation to learn a bit more about the methods.</p>
+</section>
 </section>
 
 
@@ -57,7 +93,11 @@ The first step is to be sure to have <code class="code docutils literal notransl
 
 <h3>Navigation</h3>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-your-environment">Setting up your environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="getting-started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Script usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Imaging-Transcriptomics.html">What is imaging transcriptomics</a></li>
