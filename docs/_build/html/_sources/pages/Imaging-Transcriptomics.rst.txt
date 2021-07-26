@@ -1,4 +1,6 @@
 
+.. _imgtrans:
+
 ================================
 What is imaging transcriptomics?
 ================================
@@ -12,24 +14,59 @@ An overview of the methodology can be seen in the figure below.
     :align: center
 
 
+
 In brief, average values of the scan are extracted from 41 brain regions as defined by the Desikan-Killiany (DK) atlas. Regional values are then used to perform partial least squares (PLS) regression with gene expression data from the Allen Human Brain Atlas (AHBA) mapped to the DK atlas, in the left hemisphere only. 
 
 As a result of the PLS regression we obtain the ranked genes list according to the spatial alignment with the neuroimaging marker of interest.
 
-.. seealso:: For a more comprehensive dive into the methodology have a look at our paper: **Imaging transcriptomics: Convergent cellular, transcriptomic, and molecular neuroimaging signatures in the healthy adult human brain**. *Daniel Martins, Alessio Giacomel, Steven CR Williams, Federico Turkheimer, Ottavia Dipasquale, Mattia Veronese, PET templates working group*. bioRxiv 2021.06.18.448872; doi: `https://doi.org/10.1101/2021.06.18.448872 <https://doi.org/10.1101/2021.06.18.448872>`_
+.. seealso:: For a more comprehensive dive into the methodology have a look at our paper: `Imaging transcriptomics: Convergent cellular, transcriptomic, and molecular neuroimaging signatures in the healthy adult human brain. <https://doi.org/10.1101/2021.06.18.448872>`_ *Daniel Martins, Alessio Giacomel, Steven CR Williams, Federico Turkheimer, Ottavia Dipasquale, Mattia Veronese, PET templates working group*. bioRxiv 2021.06.18.448872; doi: `https://doi.org/10.1101/2021.06.18.448872 <https://doi.org/10.1101/2021.06.18.448872>`_
 
 
 Allen Human Brain Atlas
 -----------------------
-The Allen Human Brain Atlas is a 
+The Allen Human Brain Atlas (AHBA) freely available multimodal atlas of gene expression and anatomy comprising a comprehensive ‘all genes–all structures’ array-based dataset of gene expression and complementary *in situ hybridization* (ISH) gene expression studies targeting selected genes in specific brain regions. Available via the Allen Brain Atlas data portal (`www.brain-map.org <www.brain-map.org>`_), the Atlas integrates structure, function, and gene expression data to accelerate basic and clinical research of the human brain in normal and disease states [Shein2012]_. 
 
 
 Desikan-Killiany Atlas
 ----------------------
 The Desikan-Killiany atlas is a parcellation atlas of the human brain, which includes both cortical and subcortical regions.
 
+This atlas is derived from a dataset of 40 MRI scans where 34 cortical ROIs were manually delineated for each of the individual hemispheres. More details on the ROIs of the atlas or methods to derive it refer to the original paper [Desikan2006]_ 
+
+.. figure:: ../_static/dk_atlas.jpg
+    :align: center
+    :scale: 75 %
+    :alt: Desikan-Killiany Atlas regions.
+
+    Representation of the pial and inflated view of the cortical regions from the Desikan-Killiany atlas. Image from the `orignal paper <https://doi.org/10.1016/j.neuroimage.2006.01.021>`_ [Desikan2006]_
+
+
+
 Partial least squares
 ---------------------
- 
+Partial least squares (PLS) is a method used to construct predictive models when the *measured variabels* (*factors*) are many and highly collinear, contrary to multiple linear regression, where the factors are few and not significantly collinear.
+
+PLS as a method has an enphasis on predicting the responses and not necessarily in understanding the underlying relationship.
+
+The idea of PLS is to ectract underlying (*latent*) factors accounting for as much of the variation of the factor while modelling the responses as well.
+
+In PLS the X scores  (**X**, *factors*) and the Y scores (**Y**) are chosen so that the relationship between successive pairs of scores is as strong as possible [Tobias1996]_
+
+.. seealso:: For more details on PLS regression you can have a look at these papers:
+
+    * [Tobias1996]_
+    * [Naers1985]_
+    * [deJong1993]_
 
 
+.. rubric:: References
+
+.. [Shein2012] **The Allen Human Brain Atlas: Comprehensive gene expression mapping of the human brain.** *Elaine H. Shein, Caroline C. Overly, Allan R. Jones*, Trends in Neuroscience vol. 35, issue 12, December 2012; doi: `https://doi.org/10.1016/j.tins.2012.09.005 <https://doi.org/10.1016/j.tins.2012.09.005>`_
+
+.. [Desikan2006] **An automated labeling system for subdividing the human cerebral cortex on MRI scans into gyral based regions of interest.** *Rahul S.Desikan, Florent Ségonne, Bruce Fischl, Brian T. Quinn, Bradford C. Dickerson, Deborah Blacker, Randy L. Buckner, Anders M. Dale, R. Paul Maguire, Bradley T. Hyman, Marilyn S. Albert, Ronald J. Killiany*, NeuroImage, Volume 31, Issue 3, July 2006; doi: `https://doi.org/10.1016/j.neuroimage.2006.01.021 <https://doi.org/10.1016/j.neuroimage.2006.01.021>`_
+
+.. [Tobias1996] **An Introduction to Partial Least Squares Regression.** *R. Tobias*, `https://stats.idre.ucla.edu/wp-content/uploads/2016/02/pls.pdf <https://stats.idre.ucla.edu/wp-content/uploads/2016/02/pls.pdf>`_
+
+.. [Naers1985] **Comparison of prediction methods for multicollinear data**, *T. Naes and H. Martens*, Communications in Statistics, Simulation and Computation, 14(3), 545-576.
+
+.. [deJong1993] **SIMPLS: An alternative approach to partial least squares regression.** *Sijmen de Jong*, Chemometrics and Intelligent Laboratory Systems, March 1993, doi: `https://doi.org/10.1016/0169-7439(93)85002-X <https://doi.org/10.1016/0169-7439(93)85002-X>`_

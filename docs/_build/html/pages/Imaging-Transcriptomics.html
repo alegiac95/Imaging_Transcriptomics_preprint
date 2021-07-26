@@ -4,15 +4,15 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>What is imaging transcriptomics? &#8212; Imaging-transcriptomics  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="What to do with your results" href="After-script.html" />
@@ -33,8 +33,8 @@
 
           <div class="body" role="main">
             
-  <section id="what-is-imaging-transcriptomics">
-<h1>What is imaging transcriptomics?<a class="headerlink" href="#what-is-imaging-transcriptomics" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="what-is-imaging-transcriptomics">
+<span id="imgtrans"></span><h1>What is imaging transcriptomics?<a class="headerlink" href="#what-is-imaging-transcriptomics" title="Permalink to this headline">¶</a></h1>
 <p>Imaging transcriptomics is a methodology that allows to identify the spatial autocorrelation between gene expression patterns and some property of brain structure or function as measured by neuroimaging (e.g., MRI, fMRI, PET).</p>
 <p>An overview of the methodology can be seen in the figure below.</p>
 <img alt="alternate-text" class="align-center" src="../_images/imaging_transcriptomics.png" />
@@ -42,20 +42,56 @@
 <p>As a result of the PLS regression we obtain the ranked genes list according to the spatial alignment with the neuroimaging marker of interest.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p>For a more comprehensive dive into the methodology have a look at our paper: <strong>Imaging transcriptomics: Convergent cellular, transcriptomic, and molecular neuroimaging signatures in the healthy adult human brain</strong>. <em>Daniel Martins, Alessio Giacomel, Steven CR Williams, Federico Turkheimer, Ottavia Dipasquale, Mattia Veronese, PET templates working group</em>. bioRxiv 2021.06.18.448872; doi: <a class="reference external" href="https://doi.org/10.1101/2021.06.18.448872">https://doi.org/10.1101/2021.06.18.448872</a></p>
+<p>For a more comprehensive dive into the methodology have a look at our paper: <a class="reference external" href="https://doi.org/10.1101/2021.06.18.448872">Imaging transcriptomics: Convergent cellular, transcriptomic, and molecular neuroimaging signatures in the healthy adult human brain.</a> <em>Daniel Martins, Alessio Giacomel, Steven CR Williams, Federico Turkheimer, Ottavia Dipasquale, Mattia Veronese, PET templates working group</em>. bioRxiv 2021.06.18.448872; doi: <a class="reference external" href="https://doi.org/10.1101/2021.06.18.448872">https://doi.org/10.1101/2021.06.18.448872</a></p>
 </div>
-<section id="allen-human-brain-atlas">
+<div class="section" id="allen-human-brain-atlas">
 <h2>Allen Human Brain Atlas<a class="headerlink" href="#allen-human-brain-atlas" title="Permalink to this headline">¶</a></h2>
-<p>The Allen Human Brain Atlas is a</p>
-</section>
-<section id="desikan-killiany-atlas">
+<p>The Allen Human Brain Atlas (AHBA) freely available multimodal atlas of gene expression and anatomy comprising a comprehensive ‘all genes–all structures’ array-based dataset of gene expression and complementary <em>in situ hybridization</em> (ISH) gene expression studies targeting selected genes in specific brain regions. Available via the Allen Brain Atlas data portal (<a class="reference external" href="www.brain-map.org">www.brain-map.org</a>), the Atlas integrates structure, function, and gene expression data to accelerate basic and clinical research of the human brain in normal and disease states <a class="reference internal" href="#shein2012" id="id1"><span>[Shein2012]</span></a>.</p>
+</div>
+<div class="section" id="desikan-killiany-atlas">
 <h2>Desikan-Killiany Atlas<a class="headerlink" href="#desikan-killiany-atlas" title="Permalink to this headline">¶</a></h2>
 <p>The Desikan-Killiany atlas is a parcellation atlas of the human brain, which includes both cortical and subcortical regions.</p>
-</section>
-<section id="partial-least-squares">
+<p>This atlas is derived from a dataset of 40 MRI scans where 34 cortical ROIs were manually delineated for each of the individual hemispheres. More details on the ROIs of the atlas or methods to derive it refer to the original paper <a class="reference internal" href="#desikan2006" id="id2"><span>[Desikan2006]</span></a></p>
+<div class="figure align-center" id="id8">
+<a class="reference internal image-reference" href="../_images/dk_atlas.jpg"><img alt="Desikan-Killiany Atlas regions." src="../_images/dk_atlas.jpg" style="width: 586.5px; height: 498.75px;" /></a>
+<p class="caption"><span class="caption-text">Representation of the pial and inflated view of the cortical regions from the Desikan-Killiany atlas. Image from the <a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2006.01.021">orignal paper</a> <a class="reference internal" href="#desikan2006" id="id3"><span>[Desikan2006]</span></a></span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+</div>
+<div class="section" id="partial-least-squares">
 <h2>Partial least squares<a class="headerlink" href="#partial-least-squares" title="Permalink to this headline">¶</a></h2>
-</section>
-</section>
+<p>Partial least squares (PLS) is a method used to construct predictive models when the <em>measured variabels</em> (<em>factors</em>) are many and highly collinear, contrary to multiple linear regression, where the factors are few and not significantly collinear.</p>
+<p>PLS as a method has an enphasis on predicting the responses and not necessarily in understanding the underlying relationship.</p>
+<p>The idea of PLS is to ectract underlying (<em>latent</em>) factors accounting for as much of the variation of the factor while modelling the responses as well.</p>
+<p>In PLS the X scores  (<strong>X</strong>, <em>factors</em>) and the Y scores (<strong>Y</strong>) are chosen so that the relationship between successive pairs of scores is as strong as possible <a class="reference internal" href="#tobias1996" id="id4"><span>[Tobias1996]</span></a></p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>For more details on PLS regression you can have a look at these papers:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#tobias1996" id="id5"><span>[Tobias1996]</span></a></p></li>
+<li><p><a class="reference internal" href="#naers1985" id="id6"><span>[Naers1985]</span></a></p></li>
+<li><p><a class="reference internal" href="#dejong1993" id="id7"><span>[deJong1993]</span></a></p></li>
+</ul>
+</div>
+<p class="rubric">References</p>
+<dl class="citation">
+<dt class="label" id="shein2012"><span class="brackets"><a class="fn-backref" href="#id1">Shein2012</a></span></dt>
+<dd><p><strong>The Allen Human Brain Atlas: Comprehensive gene expression mapping of the human brain.</strong> <em>Elaine H. Shein, Caroline C. Overly, Allan R. Jones</em>, Trends in Neuroscience vol. 35, issue 12, December 2012; doi: <a class="reference external" href="https://doi.org/10.1016/j.tins.2012.09.005">https://doi.org/10.1016/j.tins.2012.09.005</a></p>
+</dd>
+<dt class="label" id="desikan2006"><span class="brackets">Desikan2006</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id3">2</a>)</span></dt>
+<dd><p><strong>An automated labeling system for subdividing the human cerebral cortex on MRI scans into gyral based regions of interest.</strong> <em>Rahul S.Desikan, Florent Ségonne, Bruce Fischl, Brian T. Quinn, Bradford C. Dickerson, Deborah Blacker, Randy L. Buckner, Anders M. Dale, R. Paul Maguire, Bradley T. Hyman, Marilyn S. Albert, Ronald J. Killiany</em>, NeuroImage, Volume 31, Issue 3, July 2006; doi: <a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2006.01.021">https://doi.org/10.1016/j.neuroimage.2006.01.021</a></p>
+</dd>
+<dt class="label" id="tobias1996"><span class="brackets">Tobias1996</span><span class="fn-backref">(<a href="#id4">1</a>,<a href="#id5">2</a>)</span></dt>
+<dd><p><strong>An Introduction to Partial Least Squares Regression.</strong> <em>R. Tobias</em>, <a class="reference external" href="https://stats.idre.ucla.edu/wp-content/uploads/2016/02/pls.pdf">https://stats.idre.ucla.edu/wp-content/uploads/2016/02/pls.pdf</a></p>
+</dd>
+<dt class="label" id="naers1985"><span class="brackets"><a class="fn-backref" href="#id6">Naers1985</a></span></dt>
+<dd><p><strong>Comparison of prediction methods for multicollinear data</strong>, <em>T. Naes and H. Martens</em>, Communications in Statistics, Simulation and Computation, 14(3), 545-576.</p>
+</dd>
+<dt class="label" id="dejong1993"><span class="brackets"><a class="fn-backref" href="#id7">deJong1993</a></span></dt>
+<dd><p><strong>SIMPLS: An alternative approach to partial least squares regression.</strong> <em>Sijmen de Jong</em>, Chemometrics and Intelligent Laboratory Systems, March 1993, doi: <a class="reference external" href="https://doi.org/10.1016/0169-7439(93)85002-X">https://doi.org/10.1016/0169-7439(93)85002-X</a></p>
+</dd>
+</dl>
+</div>
+</div>
 
 
           </div>
@@ -124,7 +160,7 @@
       &copy;2021, Daniel Martins, MD, PhD; Alessio Giacomel.
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
       |
