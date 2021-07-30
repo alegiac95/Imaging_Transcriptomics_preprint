@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>What is imaging transcriptomics? &#8212; Imaging-transcriptomics  documentation</title>
+    <title>What is imaging transcriptomics? &#8212; Imaging Transcriptomics  documentation</title>
     <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -35,7 +35,7 @@
             
   <div class="section" id="what-is-imaging-transcriptomics">
 <span id="imgtrans"></span><h1>What is imaging transcriptomics?<a class="headerlink" href="#what-is-imaging-transcriptomics" title="Permalink to this headline">¶</a></h1>
-<p>Imaging transcriptomics is a methodology that allows to identify the spatial autocorrelation between gene expression patterns and some property of brain structure or function as measured by neuroimaging (e.g., MRI, fMRI, PET).</p>
+<p>Imaging transcriptomics is a methodology that allows to identify patterns of correlation between gene expression and some property of brain structure or function as measured by neuroimaging (e.g., MRI, fMRI, PET).</p>
 <p>An overview of the methodology can be seen in the figure below.</p>
 <img alt="alternate-text" class="align-center" src="../_images/imaging_transcriptomics.png" />
 <p>In brief, average values of the scan are extracted from 41 brain regions as defined by the Desikan-Killiany (DK) atlas. Regional values are then used to perform partial least squares (PLS) regression with gene expression data from the Allen Human Brain Atlas (AHBA) mapped to the DK atlas, in the left hemisphere only.</p>
@@ -47,47 +47,57 @@
 <div class="section" id="allen-human-brain-atlas">
 <h2>Allen Human Brain Atlas<a class="headerlink" href="#allen-human-brain-atlas" title="Permalink to this headline">¶</a></h2>
 <p>The Allen Human Brain Atlas (AHBA) freely available multimodal atlas of gene expression and anatomy comprising a comprehensive ‘all genes–all structures’ array-based dataset of gene expression and complementary <em>in situ hybridization</em> (ISH) gene expression studies targeting selected genes in specific brain regions. Available via the Allen Brain Atlas data portal (<a class="reference external" href="www.brain-map.org">www.brain-map.org</a>), the Atlas integrates structure, function, and gene expression data to accelerate basic and clinical research of the human brain in normal and disease states <a class="reference internal" href="#shein2012" id="id1"><span>[Shein2012]</span></a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">imaging-transcriptomics</span></code> script uses a modified version of the AHBA gene data parcellated onto 83 regions from the DK atlas obtained using the <a class="reference external" href="https://github.com/netneurolab/abagen">abagen toolbox</a>.
+In brief, probes that cannot be reliably matched to genes were discarded and filtered based on their intensity compared to the background noise level. The remainig probes were pooled retaining only the one with the highest differential stability to represent each gene, resulting in 15,633 probes each representing an unique gene. The genes were then assigned to brain regions based on their corrected MNI coordinates.</p>
+<p>More details on the processing of the transcriptomic data are available in the methods section of the paper <a class="reference internal" href="#martins2021" id="id2"><span>[Martins2021]</span></a>.</p>
 </div>
 <div class="section" id="desikan-killiany-atlas">
 <h2>Desikan-Killiany Atlas<a class="headerlink" href="#desikan-killiany-atlas" title="Permalink to this headline">¶</a></h2>
-<p>The Desikan-Killiany atlas is a parcellation atlas of the human brain, which includes both cortical and subcortical regions.</p>
-<p>This atlas is derived from a dataset of 40 MRI scans where 34 cortical ROIs were manually delineated for each of the individual hemispheres. More details on the ROIs of the atlas or methods to derive it refer to the original paper <a class="reference internal" href="#desikan2006" id="id2"><span>[Desikan2006]</span></a></p>
-<div class="figure align-center" id="id8">
+<p>The DK atlas is a parcellation atlas of the human brain, which includes both cortical and subcortical regions.</p>
+<p>This atlas is derived from a dataset of 40 MRI scans where 34 cortical ROIs were manually delineated for each of the individual hemispheres. More details on the ROIs of the atlas or methods to derive it refer to the original paper <a class="reference internal" href="#desikan2006" id="id3"><span>[Desikan2006]</span></a></p>
+<div class="figure align-center" id="id11">
 <a class="reference internal image-reference" href="../_images/dk_atlas.jpg"><img alt="Desikan-Killiany Atlas regions." src="../_images/dk_atlas.jpg" style="width: 586.5px; height: 498.75px;" /></a>
-<p class="caption"><span class="caption-text">Representation of the pial and inflated view of the cortical regions from the Desikan-Killiany atlas. Image from the <a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2006.01.021">orignal paper</a> <a class="reference internal" href="#desikan2006" id="id3"><span>[Desikan2006]</span></a></span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+<p class="caption"><span class="caption-text">Representation of the pial and inflated view of the cortical regions from the Desikan-Killiany atlas. Image from the <a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2006.01.021">orignal paper</a> <a class="reference internal" href="#desikan2006" id="id4"><span>[Desikan2006]</span></a></span><a class="headerlink" href="#id11" title="Permalink to this image">¶</a></p>
 </div>
 </div>
 <div class="section" id="partial-least-squares">
 <h2>Partial least squares<a class="headerlink" href="#partial-least-squares" title="Permalink to this headline">¶</a></h2>
 <p>Partial least squares (PLS) is a method used to construct predictive models when the <em>measured variabels</em> (<em>factors</em>) are many and highly collinear, contrary to multiple linear regression, where the factors are few and not significantly collinear.</p>
-<p>PLS as a method has an enphasis on predicting the responses and not necessarily in understanding the underlying relationship.</p>
-<p>The idea of PLS is to ectract underlying (<em>latent</em>) factors accounting for as much of the variation of the factor while modelling the responses as well.</p>
-<p>In PLS the X scores  (<strong>X</strong>, <em>factors</em>) and the Y scores (<strong>Y</strong>) are chosen so that the relationship between successive pairs of scores is as strong as possible <a class="reference internal" href="#tobias1996" id="id4"><span>[Tobias1996]</span></a></p>
+<p>PLS as a method has an emphasis on predicting the responses and not necessarily in understanding the underlying relationship.</p>
+<p>The idea of PLS is to extract underlying (<em>latent</em>) factors accounting for as much of the variation of the factor while modelling the responses as well.</p>
+<p>In PLS the X scores  (<strong>X</strong>, <em>factors</em>) and the Y scores (<strong>Y</strong>) are chosen so that the relationship between successive pairs of scores is as strong as possible <a class="reference internal" href="#tobias1996" id="id5"><span>[Tobias1996]</span></a>.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p>For more details on PLS regression you can have a look at these papers:</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#tobias1996" id="id5"><span>[Tobias1996]</span></a></p></li>
-<li><p><a class="reference internal" href="#naers1985" id="id6"><span>[Naers1985]</span></a></p></li>
-<li><p><a class="reference internal" href="#dejong1993" id="id7"><span>[deJong1993]</span></a></p></li>
+<li><p><a class="reference internal" href="#tobias1996" id="id6"><span>[Tobias1996]</span></a></p></li>
+<li><p><a class="reference internal" href="#naers1985" id="id7"><span>[Naers1985]</span></a></p></li>
+<li><p><a class="reference internal" href="#dejong1993" id="id8"><span>[deJong1993]</span></a></p></li>
+<li><p><a class="reference internal" href="#vertes2016" id="id9"><span>[Vertes2016]</span></a></p></li>
 </ul>
 </div>
 <p class="rubric">References</p>
 <dl class="citation">
+<dt class="label" id="martins2021"><span class="brackets"><a class="fn-backref" href="#id2">Martins2021</a></span></dt>
+<dd><p><strong>Imaging transcriptomics: Convergent cellular, transcriptomic, and molecular neuroimaging signatures in the healthy adult human brain.</strong> <em>Daniel Martins, Alessio Giacomel, Steven CR Williams, Federico Turkheimer, Ottavia Dipasquale, Mattia Veronese, PET templates working group</em>. bioRxiv 2021.06.18.448872; doi: <a class="reference external" href="https://doi.org/10.1101/2021.06.18.448872">https://doi.org/10.1101/2021.06.18.448872</a></p>
+</dd>
 <dt class="label" id="shein2012"><span class="brackets"><a class="fn-backref" href="#id1">Shein2012</a></span></dt>
 <dd><p><strong>The Allen Human Brain Atlas: Comprehensive gene expression mapping of the human brain.</strong> <em>Elaine H. Shein, Caroline C. Overly, Allan R. Jones</em>, Trends in Neuroscience vol. 35, issue 12, December 2012; doi: <a class="reference external" href="https://doi.org/10.1016/j.tins.2012.09.005">https://doi.org/10.1016/j.tins.2012.09.005</a></p>
 </dd>
-<dt class="label" id="desikan2006"><span class="brackets">Desikan2006</span><span class="fn-backref">(<a href="#id2">1</a>,<a href="#id3">2</a>)</span></dt>
+<dt class="label" id="desikan2006"><span class="brackets">Desikan2006</span><span class="fn-backref">(<a href="#id3">1</a>,<a href="#id4">2</a>)</span></dt>
 <dd><p><strong>An automated labeling system for subdividing the human cerebral cortex on MRI scans into gyral based regions of interest.</strong> <em>Rahul S.Desikan, Florent Ségonne, Bruce Fischl, Brian T. Quinn, Bradford C. Dickerson, Deborah Blacker, Randy L. Buckner, Anders M. Dale, R. Paul Maguire, Bradley T. Hyman, Marilyn S. Albert, Ronald J. Killiany</em>, NeuroImage, Volume 31, Issue 3, July 2006; doi: <a class="reference external" href="https://doi.org/10.1016/j.neuroimage.2006.01.021">https://doi.org/10.1016/j.neuroimage.2006.01.021</a></p>
 </dd>
-<dt class="label" id="tobias1996"><span class="brackets">Tobias1996</span><span class="fn-backref">(<a href="#id4">1</a>,<a href="#id5">2</a>)</span></dt>
+<dt class="label" id="tobias1996"><span class="brackets">Tobias1996</span><span class="fn-backref">(<a href="#id5">1</a>,<a href="#id6">2</a>)</span></dt>
 <dd><p><strong>An Introduction to Partial Least Squares Regression.</strong> <em>R. Tobias</em>, <a class="reference external" href="https://stats.idre.ucla.edu/wp-content/uploads/2016/02/pls.pdf">https://stats.idre.ucla.edu/wp-content/uploads/2016/02/pls.pdf</a></p>
 </dd>
-<dt class="label" id="naers1985"><span class="brackets"><a class="fn-backref" href="#id6">Naers1985</a></span></dt>
+<dt class="label" id="naers1985"><span class="brackets"><a class="fn-backref" href="#id7">Naers1985</a></span></dt>
 <dd><p><strong>Comparison of prediction methods for multicollinear data</strong>, <em>T. Naes and H. Martens</em>, Communications in Statistics, Simulation and Computation, 14(3), 545-576.</p>
 </dd>
-<dt class="label" id="dejong1993"><span class="brackets"><a class="fn-backref" href="#id7">deJong1993</a></span></dt>
+<dt class="label" id="dejong1993"><span class="brackets"><a class="fn-backref" href="#id8">deJong1993</a></span></dt>
 <dd><p><strong>SIMPLS: An alternative approach to partial least squares regression.</strong> <em>Sijmen de Jong</em>, Chemometrics and Intelligent Laboratory Systems, March 1993, doi: <a class="reference external" href="https://doi.org/10.1016/0169-7439(93)85002-X">https://doi.org/10.1016/0169-7439(93)85002-X</a></p>
+</dd>
+<dt class="label" id="vertes2016"><span class="brackets"><a class="fn-backref" href="#id9">Vertes2016</a></span></dt>
+<dd><p><strong>Gene transcription profiles associated with inter-modular hubs and connection distance in human functional magnetic resonance imaging networks.</strong> <em>Petra E. Vértes, Timothy Rittman, Kirstie J. Whitaker, Rafael Romero-Garcia, František Váša, Manfred G. Kitzbichler, Konrad Wagstyl, Peter Fonagy, Raymond J. Dolan, Peter B. Jones, Ian M. Goodyer, the NSPN Consortium and Edward T. Bullmore</em>, Philosophical Transactions of the Royal Society B, October 2016, doi: <a class="reference external" href="https://doi.org/10.1098/rstb.2015.0362">https://doi.org/10.1098/rstb.2015.0362</a></p>
 </dd>
 </dl>
 </div>
@@ -100,7 +110,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../index.html">Imaging-transcriptomics</a></h1>
+<h1 class="logo"><a href="../index.html">Imaging Transcriptomics</a></h1>
 
 
 

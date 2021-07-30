@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'Imaging-transcriptomics'
+project = 'Imaging Transcriptomics'
 copyright = '2021, Daniel Martins, MD, PhD; Alessio Giacomel'
 author = 'Daniel Martins, MD, PhD; Alessio Giacomel'
 
@@ -28,7 +28,6 @@ author = 'Daniel Martins, MD, PhD; Alessio Giacomel'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.imgmath'
 ]
 
 # Add any paths that contain templates here, relative to this directory.

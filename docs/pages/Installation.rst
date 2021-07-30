@@ -4,12 +4,12 @@ How to install
 ==============
 
 Here is the guide on how to install the *Imaging-Transcriptomics* tool so you can run it from your command line. 
-We reccomend using :code:`anaconda` to manage your installation of the :code:`imaging-transcriptomics` package.
+We recommend using :code:`anaconda` to manage your installation of the :code:`imaging-transcriptomics` package.
 
 To run the script you will need to install two additional packages not listed in :code:`pip`, which are:
 
 * `pyls <https://github.com/rmarkello/pyls/>`_, to perform partial least squares regression
-* `spatialnulls <https://markello-spatialnulls.netlify.app/index.html>`_, to perform the permutatiuon of cortical brain areas maintaining the autocorrelation of the brain.
+* `spatialnulls <https://markello-spatialnulls.netlify.app/index.html>`_, to perform the permutation of cortical brain areas maintaining the autocorrelation of the brain.
 
 Both this packages are available from Github.
 
@@ -39,7 +39,7 @@ The previous list of commands will create a conda environment (named *imaging_tr
 
 Installation
 ------------
-To install the package once the previous step is completed run from your termianl the command:
+To install the package (once the previous step) is completed run from your termianl the command:
 
 .. code-block:: shell
 

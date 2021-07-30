@@ -2,7 +2,6 @@
 How to cite and get in touch
 ============================
 
-In this page are the contact information about the authors of the paper and software package with additional links to reference both in case you're using our work in your research.
 
 Contact us
 ----------
@@ -17,4 +16,8 @@ Cite our work
 If you use our software or methods in your research please cite our work:
 
 * **Imaging transcriptomics: Convergent cellular, transcriptomic, and molecular neuroimaging signatures in the healthy adult human brain**. *Daniel Martins, Alessio Giacomel, Steven CR Williams, Federico Turkheimer, Ottavia Dipasquale, Mattia Veronese, PET templates working group*. bioRxiv 2021.06.18.448872; doi: `https://doi.org/10.1101/2021.06.18.448872 <https://doi.org/10.1101/2021.06.18.448872>`_
-* **Imaging-trnascriptomics** zenodo - TO ADD.
+* **Imaging-transcriptomics** zenodo - TO ADD.
+
+
+
+For more information about about ongoing research please visit our website at `https://molecular-neuroimaging.com <https://molecular-neuroimaging.com>`_.
